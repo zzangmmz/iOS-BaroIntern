@@ -14,7 +14,7 @@
 		0F5401472D8330FE009EAB2C /* Exceptions for "iOS-BaroIntern-LeeMyungji" folder in "iOS-BaroIntern-LeeMyungji" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				App/Info.plist,
 			);
 			target = 0F5401312D8330FC009EAB2C /* iOS-BaroIntern-LeeMyungji */;
 		};
@@ -147,7 +147,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YBKAN7VADJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS-BaroIntern-LeeMyungji/Info.plist";
+				INFOPLIST_FILE = "iOS-BaroIntern-LeeMyungji/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -180,7 +180,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YBKAN7VADJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS-BaroIntern-LeeMyungji/Info.plist";
+				INFOPLIST_FILE = "iOS-BaroIntern-LeeMyungji/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
