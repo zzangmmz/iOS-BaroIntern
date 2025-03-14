@@ -23,20 +23,35 @@ final class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupSubviews()
+        setupConstraints()
+        setupActions()
     }
     
-    private func setupUI() {
-        view.addSubview(startButton)
+    private func setupSubviews() {
+        [
+            startButton
+        ].forEach {
+            view.addSubview($0)
+        }
+    }
+    
+    private func setupConstraints() {
+        [
+            startButton
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        startButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             startButton.widthAnchor.constraint(equalToConstant: 150),
             startButton.heightAnchor.constraint(equalToConstant: 60)
         ])
-        
+    }
+    
+    private func setupActions() {
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
