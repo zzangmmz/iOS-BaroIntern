@@ -7,6 +7,10 @@
 
 import UIKit
 
+private struct UserDefaultsKeys {
+    static let isLoggedIn = "isLoggedIn"
+}
+
 final class StartViewController: UIViewController {
     private let startButton: UIButton = {
         let button = UIButton()
@@ -32,5 +36,19 @@ final class StartViewController: UIViewController {
             startButton.widthAnchor.constraint(equalToConstant: 150),
             startButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+        
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func startButtonTapped() {
+        guard isLoggedIn() else {
+            // 회원가입 화면으로 이동
+            return
+        }
+        // 로그인 성공 화면으로 이동
+    }
+    
+    private func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn)
     }
 }
