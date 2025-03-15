@@ -12,14 +12,7 @@ final class SignUpViewController: UIViewController {
     // ID
     private let idContainerView = InputContainerView()
     private let idLabel = InputTitleLabel(text: "이메일")
-    
-    private let idTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .clear
-        textField.font = .systemFont(ofSize: 18)
-        return textField
-    }()
+    private let idTextField = InputTextField()
     
     private let idValidationLabel: UILabel = {
         let label = UILabel()
@@ -31,14 +24,7 @@ final class SignUpViewController: UIViewController {
     // password
     private let passwordContainerView = InputContainerView()
     private let passwordLabel = InputTitleLabel(text: "비밀번호")
-    
-    private let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .clear
-        textField.font = .systemFont(ofSize: 18)
-        return textField
-    }()
+    private let passwordTextField = InputTextField()
     
     private let togglePasswordButton: UIButton = {
         let button = UIButton()
@@ -58,14 +44,7 @@ final class SignUpViewController: UIViewController {
     // password-check
     private let passwordCheckContainerView = InputContainerView()
     private let passwordCheckLabel = InputTitleLabel(text: "비밀번호 확인")
-    
-    private let passwordCheckTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .clear
-        textField.font = .systemFont(ofSize: 18)
-        return textField
-    }()
+    private let passwordCheckTextField = InputTextField()
     
     private let togglePasswordCheckButton: UIButton = {
         let button = UIButton()
@@ -85,14 +64,7 @@ final class SignUpViewController: UIViewController {
     // nickname
     private let nicknameContainerView = InputContainerView()
     private let nicknameLabel = InputTitleLabel(text: "닉네임")
-    
-    private let nicknameTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .clear
-        textField.font = .systemFont(ofSize: 18)
-        return textField
-    }()
+    private let nicknameTextField = InputTextField()
     
     // sign-up button
     private let signUpButton: UIButton = {
