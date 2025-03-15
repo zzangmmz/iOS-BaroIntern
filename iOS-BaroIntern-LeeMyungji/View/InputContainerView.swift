@@ -1,5 +1,5 @@
 //
-//  TextFieldContainerView.swift
+//  InputContainerView.swift
 //  iOS-BaroIntern-LeeMyungji
 //
 //  Created by 이명지 on 3/15/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TextFieldContainerView: UIView {
+final class InputContainerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         

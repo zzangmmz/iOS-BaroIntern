@@ -10,7 +10,7 @@ import UIKit
 final class SignUpViewController: UIViewController {
     // MARK: - UI Components
     // ID
-    private let idContainerView = TextFieldContainerView()
+    private let idContainerView = InputContainerView()
     
     private let idLabel: UILabel = {
         let label = UILabel()
@@ -36,7 +36,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // password
-    private let passwordContainerView = TextFieldContainerView()
+    private let passwordContainerView = InputContainerView()
     
     private let passwordLabel: UILabel = {
         let label = UILabel()
@@ -70,7 +70,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // password-check
-    private let passwordCheckContainerView = TextFieldContainerView()
+    private let passwordCheckContainerView = InputContainerView()
     
     private let passwordCheckLabel: UILabel = {
         let label = UILabel()
@@ -104,7 +104,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // nickname
-    private let nicknameContainerView = TextFieldContainerView()
+    private let nicknameContainerView = InputContainerView()
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
