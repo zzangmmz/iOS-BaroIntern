@@ -43,4 +43,55 @@ final class SignUpViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 18)
         return button
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupSubviews()
+    }
+    
+    private func setupSubviews() {
+        [
+            idLabel,
+            idTextField
+        ].forEach {
+            idContainerView.addSubview($0)
+        }
+        
+        [
+            passwordLabel,
+            passwordTextField,
+            togglePasswordButton
+        ].forEach {
+            passwordContainerView.addSubview($0)
+        }
+        
+        [
+            passwordCheckLabel,
+            passwordCheckTextField,
+            togglePasswordCheckButton
+        ].forEach {
+            passwordCheckContainerView.addSubview($0)
+        }
+        
+        [
+            nicknameLabel,
+            nicknameTextField
+        ].forEach {
+            nicknameContainerView.addSubview($0)
+        }
+        
+        [
+            idContainerView,
+            idValidationLabel,
+            passwordContainerView,
+            passwordValidationLabel,
+            passwordCheckContainerView,
+            passwordCheckValidationLabel,
+            nicknameContainerView,
+            signUpButton
+        ].forEach {
+            view.addSubview($0)
+        }
+    }
 }
