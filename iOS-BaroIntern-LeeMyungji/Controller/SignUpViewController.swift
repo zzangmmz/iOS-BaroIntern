@@ -13,13 +13,7 @@ final class SignUpViewController: UIViewController {
     private let idContainerView = InputContainerView()
     private let idLabel = InputTitleLabel(text: "이메일")
     private let idTextField = InputTextField()
-    
-    private let idValidationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.font = .systemFont(ofSize: 11)
-        return label
-    }()
+    private let idValidationLabel = InputValidationLabel()
     
     // password
     private let passwordContainerView = InputContainerView()
@@ -34,12 +28,7 @@ final class SignUpViewController: UIViewController {
         return button
     }()
     
-    private let passwordValidationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.font = .systemFont(ofSize: 11)
-        return label
-    }()
+    private let passwordValidationLabel = InputValidationLabel()
     
     // password-check
     private let passwordCheckContainerView = InputContainerView()
@@ -54,12 +43,7 @@ final class SignUpViewController: UIViewController {
         return button
     }()
     
-    private let passwordCheckValidationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.font = .systemFont(ofSize: 11)
-        return label
-    }()
+    private let passwordCheckValidationLabel = InputValidationLabel()
     
     // nickname
     private let nicknameContainerView = InputContainerView()
