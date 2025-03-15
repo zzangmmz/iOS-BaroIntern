@@ -19,30 +19,14 @@ final class SignUpViewController: UIViewController {
     private let passwordContainerView = InputContainerView()
     private let passwordLabel = InputTitleLabel(text: "비밀번호")
     private let passwordTextField = InputTextField()
-    
-    private let togglePasswordButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .clear
-        button.titleLabel?.font = .systemFont(ofSize: 16)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
+    private let togglePasswordButton = PasswordToggleButton()
     private let passwordValidationLabel = InputValidationLabel()
     
     // password-check
     private let passwordCheckContainerView = InputContainerView()
     private let passwordCheckLabel = InputTitleLabel(text: "비밀번호 확인")
     private let passwordCheckTextField = InputTextField()
-    
-    private let togglePasswordCheckButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .clear
-        button.titleLabel?.font = .systemFont(ofSize: 16)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
+    private let togglePasswordCheckButton = PasswordToggleButton()
     private let passwordCheckValidationLabel = InputValidationLabel()
     
     // nickname
