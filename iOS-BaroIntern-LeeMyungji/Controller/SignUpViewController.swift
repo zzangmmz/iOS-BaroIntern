@@ -10,12 +10,7 @@ import UIKit
 final class SignUpViewController: UIViewController {
     // MARK: - UI Components
     // ID
-    private let idContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.layer.cornerRadius = 8
-        return view
-    }()
+    private let idContainerView = TextFieldContainerView()
     
     private let idLabel: UILabel = {
         let label = UILabel()
@@ -41,12 +36,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // password
-    private let passwordContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.layer.cornerRadius = 8
-        return view
-    }()
+    private let passwordContainerView = TextFieldContainerView()
     
     private let passwordLabel: UILabel = {
         let label = UILabel()
@@ -80,12 +70,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // password-check
-    private let passwordCheckContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.layer.cornerRadius = 8
-        return view
-    }()
+    private let passwordCheckContainerView = TextFieldContainerView()
     
     private let passwordCheckLabel: UILabel = {
         let label = UILabel()
@@ -119,12 +104,7 @@ final class SignUpViewController: UIViewController {
     }()
     
     // nickname
-    private let nicknameContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.layer.cornerRadius = 8
-        return view
-    }()
+    private let nicknameContainerView = TextFieldContainerView()
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
