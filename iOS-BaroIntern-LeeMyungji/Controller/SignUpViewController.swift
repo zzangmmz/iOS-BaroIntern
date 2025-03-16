@@ -44,6 +44,7 @@ final class SignUpViewController: UIViewController {
     // Nickname
     private let nicknameLabel = InputTitleLabel(text: "닉네임")
     private let nicknameTextField = InputTextField()
+    private let nicknameValidationLabel = InputValidationLabel()
     private lazy var nicknameContainerView = InputContainerView(subviews: [
         nicknameLabel,
         nicknameTextField
@@ -59,6 +60,7 @@ final class SignUpViewController: UIViewController {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
+        button.isEnabled = false
         return button
     }()
     
@@ -71,12 +73,18 @@ final class SignUpViewController: UIViewController {
             passwordCheckContainerView,
             passwordCheckValidationLabel,
             nicknameContainerView,
+            nicknameValidationLabel,
             signUpButton
         ])
         stackView.axis = .vertical
         stackView.spacing = 20
         return stackView
     }()
+    
+    private var isValidID = false
+    private var isValidPassword = false
+    private var isPasswordMatched = false
+    private var isValidNickname = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,14 +123,9 @@ final class SignUpViewController: UIViewController {
         }
         
         idTextField.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(8)
+            $0.horizontalEdges.equalToSuperview().inset(12)
             $0.top.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview().offset(-2)
-        }
-        
-        idValidationLabel.snp.makeConstraints {
-            $0.top.equalTo(idContainerView.snp.bottom).offset(4)
-            $0.horizontalEdges.equalTo(idContainerView.snp.horizontalEdges)
         }
         
         // Password Components
@@ -146,11 +149,6 @@ final class SignUpViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-12)
         }
         
-        passwordValidationLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordContainerView.snp.bottom).offset(4)
-            $0.horizontalEdges.equalTo(passwordContainerView.snp.horizontalEdges)
-        }
-        
         // Password-check Components
         passwordCheckContainerView.snp.makeConstraints {
             $0.height.equalTo(48)
@@ -172,11 +170,6 @@ final class SignUpViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-12)
         }
         
-        passwordCheckValidationLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordCheckContainerView.snp.bottom).offset(4)
-            $0.horizontalEdges.equalTo(passwordCheckContainerView.snp.horizontalEdges)
-        }
-        
         // Nickname Components
         nicknameContainerView.snp.makeConstraints {
             $0.height.equalTo(48)
@@ -188,7 +181,7 @@ final class SignUpViewController: UIViewController {
         }
         
         nicknameTextField.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(8)
+            $0.horizontalEdges.equalToSuperview().inset(12)
             $0.top.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview().offset(-2)
         }
@@ -203,11 +196,25 @@ final class SignUpViewController: UIViewController {
             $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(30)
         }
+        
+        [
+            idContainerView,
+            passwordContainerView,
+            passwordCheckContainerView,
+            nicknameContainerView
+        ].forEach {
+            totalStackView.setCustomSpacing(4, after: $0)
+        }
     }
     
     private func setupActions() {
         passwordSecureButton.addTarget(self, action: #selector(passwordSecureModeToggle), for: .touchUpInside)
         passwordCheckSecureButton.addTarget(self, action: #selector(passwordCheckSecureModeToggle), for: .touchUpInside)
+        
+        idTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
+        passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
+        nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     @objc private func passwordSecureModeToggle() {
@@ -234,7 +241,6 @@ final class SignUpViewController: UIViewController {
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == idTextField {
-            idContainerView.backgroundColor = .lightGray
             idLabel.font = .systemFont(ofSize: 11)
             idLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview().offset(-13)
@@ -242,7 +248,6 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == passwordTextField {
-            passwordContainerView.backgroundColor = .lightGray
             passwordLabel.font = .systemFont(ofSize: 11)
             passwordLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview().offset(-13)
@@ -250,7 +255,6 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == passwordCheckTextField {
-            passwordCheckContainerView.backgroundColor = .lightGray
             passwordCheckLabel.font = .systemFont(ofSize: 11)
             passwordCheckLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview().offset(-13)
@@ -258,7 +262,6 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == nicknameTextField {
-            nicknameContainerView.backgroundColor = .lightGray
             nicknameLabel.font = .systemFont(ofSize: 11)
             nicknameLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview().offset(-13)
@@ -272,9 +275,8 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == idTextField {
-            idContainerView.backgroundColor = .gray
             if idTextField.text == "" {
-                idLabel.font = .systemFont(ofSize: 18)
+                idLabel.font = .systemFont(ofSize: 16)
                 idLabel.snp.remakeConstraints {
                     $0.centerY.equalToSuperview()
                     $0.horizontalEdges.equalToSuperview().inset(12)
@@ -283,9 +285,8 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == passwordTextField {
-            passwordContainerView.backgroundColor = .gray
             if passwordTextField.text == "" {
-                passwordLabel.font = .systemFont(ofSize: 18)
+                passwordLabel.font = .systemFont(ofSize: 16)
                 passwordLabel.snp.remakeConstraints {
                     $0.centerY.equalToSuperview()
                     $0.horizontalEdges.equalToSuperview().inset(12)
@@ -294,9 +295,8 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == passwordCheckTextField {
-            passwordCheckContainerView.backgroundColor = .gray
             if passwordCheckTextField.text == "" {
-                passwordCheckLabel.font = .systemFont(ofSize: 18)
+                passwordCheckLabel.font = .systemFont(ofSize: 16)
                 passwordCheckLabel.snp.remakeConstraints {
                     $0.centerY.equalToSuperview()
                     $0.horizontalEdges.equalToSuperview().inset(12)
@@ -305,9 +305,8 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         if textField == nicknameTextField {
-            nicknameContainerView.backgroundColor = .gray
             if nicknameTextField.text == "" {
-                nicknameLabel.font = .systemFont(ofSize: 18)
+                nicknameLabel.font = .systemFont(ofSize: 16)
                 nicknameLabel.snp.remakeConstraints {
                     $0.centerY.equalToSuperview()
                     $0.horizontalEdges.equalToSuperview().inset(12)
@@ -335,5 +334,179 @@ extension SignUpViewController {
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - 사용자 입력 데이터 유효성 검사
+extension SignUpViewController {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        // 첫 글자가 공백이면 삭제
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        
+        if textField == idTextField {
+            validateID()
+        } else if textField == passwordTextField {
+            validatePassword()
+        } else if textField == passwordCheckTextField {
+            validatePasswordCheck()
+        } else if textField == nicknameTextField {
+            validateNickname()
+        }
+        
+        updateSignUpButtonState()
+    }
+    
+    private func validateID() {
+        guard let email = idTextField.text, !email.isEmpty else {
+            idValidationLabel.text = "이메일을 입력해주세요."
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+            return
+        }
+        
+        // 이메일에서 아이디 부분만 분리
+        let components = email.components(separatedBy: "@")
+        if components.count < 2 {
+            idValidationLabel.text = "올바른 이메일 형식이 아닙니다."
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+            return
+        }
+        
+        let id = components[0]
+        
+        // 1. 글자수 검사
+        if id.count < 6 || id.count > 20 {
+            idValidationLabel.text = "이메일 앞부분은 6-20자 사이여야 합니다."
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+            return
+        }
+        
+        // 2. 소문자, 숫자 검사
+        let idRegex = "^[a-z0-9]+$"
+        let idPredicate = NSPredicate(format: "SELF MATCHES %@", idRegex)
+        if !idPredicate.evaluate(with: id) {
+            idValidationLabel.text = "영문 소문자(a-z)와 숫자(0-9)만 허용됩니다."
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+            return
+        }
+        
+        // 3. 숫자로 시작하는지 검사
+        if let firstCharacter = id.first, firstCharacter.isNumber {
+            idValidationLabel.text = "숫자로 시작할 수 없습니다."
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+            return
+        }
+        
+        // 4. 이메일 형식에 맞는지 검사
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        let isValidFormat = emailPredicate.evaluate(with: email)
+        
+        if isValidFormat {
+            idValidationLabel.text = ""
+            idContainerView.layer.borderColor = UIColor.systemGreen.cgColor
+            idContainerView.layer.borderColor = UIColor.systemGreen.cgColor
+            isValidID = true
+        } else {
+            idValidationLabel.text = "올바른 이메일 형식이 아닙니다."
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            idValidationLabel.textColor = .systemRed
+            idContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidID = false
+        }
+    }
+    
+    private func validatePassword() {
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            passwordValidationLabel.text = "비밀번호를 입력해주세요"
+            passwordValidationLabel.textColor = .systemRed
+            passwordContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidPassword = false
+            return
+        }
+        
+        if password.count < 8 {
+            passwordValidationLabel.text = "8자 이상이어야 합니다."
+            passwordValidationLabel.textColor = .systemRed
+            passwordContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidPassword = false
+            return
+        }
+        
+        let passwordRegex = "^[A-Za-z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]+$"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        let isValidFormat = passwordPredicate.evaluate(with: password)
+        
+        if isValidFormat {
+            passwordValidationLabel.text = ""
+            passwordContainerView.layer.borderColor = UIColor.systemGreen.cgColor
+            isValidPassword = true
+        } else {
+            passwordValidationLabel.text = "비밀번호는 영문 대소문자, 숫자, 특수문자만 가능합니다."
+            passwordValidationLabel.textColor = .systemRed
+            passwordContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidPassword = false
+        }
+    }
+    
+    private func validatePasswordCheck() {
+        guard let password = passwordTextField.text, !password.isEmpty,
+              let check = passwordCheckTextField.text, !check.isEmpty else {
+            passwordCheckValidationLabel.text = "비밀번호 확인을 입력해주세요."
+            passwordCheckValidationLabel.textColor = .systemRed
+            passwordCheckContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isPasswordMatched = false
+            return
+        }
+        
+        if password == check {
+            passwordCheckValidationLabel.text = ""
+            passwordCheckContainerView.layer.borderColor = UIColor.systemGreen.cgColor
+            isPasswordMatched = true
+        } else {
+            passwordCheckValidationLabel.text = "비밀번호가 일치하지 않습니다."
+            passwordCheckValidationLabel.textColor = .systemRed
+            passwordCheckContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isPasswordMatched = false
+        }
+    }
+    
+    private func validateNickname() {
+        guard let nickname = nicknameTextField.text, !nickname.isEmpty else {
+            nicknameValidationLabel.text = "닉네임을 입력하세요."
+            nicknameValidationLabel.textColor = .systemRed
+            nicknameContainerView.layer.borderColor = UIColor.systemRed.cgColor
+            isValidNickname = false
+            return
+        }
+        
+        nicknameValidationLabel.text = ""
+        nicknameContainerView.layer.borderColor = UIColor.systemGreen.cgColor
+        isValidNickname = true
+    }
+    
+    private func updateSignUpButtonState() {
+        if isValidID && isValidPassword && isPasswordMatched && isValidNickname {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = .systemGreen
+            signUpButton.layer.borderColor = UIColor.systemGreen.cgColor
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = .clear
+        }
     }
 }
