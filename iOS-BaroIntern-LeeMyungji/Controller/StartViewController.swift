@@ -7,10 +7,6 @@
 
 import UIKit
 
-private struct UserDefaultsKeys {
-    static let isLoggedIn = "isLoggedIn"
-}
-
 final class StartViewController: UIViewController {
     private let startButton: UIButton = {
         let button = UIButton()
