@@ -7,25 +7,29 @@
 
 import UIKit
 
-private struct UserDefaultsKeys {
-    static let isLoggedIn = "isLoggedIn"
-}
-
 final class StartViewController: UIViewController {
     private let startButton: UIButton = {
         let button = UIButton()
         button.setTitle("시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitleColor(.standard, for: .normal)
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.standard.cgColor
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
         setupSubviews()
         setupConstraints()
         setupActions()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .background
     }
     
     private func setupSubviews() {
@@ -56,11 +60,12 @@ final class StartViewController: UIViewController {
     }
     
     @objc private func startButtonTapped() {
-        guard isLoggedIn() else {
+        if isLoggedIn() {
+            // 로그인 성공 화면으로 이동
+        } else {
             // 회원가입 화면으로 이동
-            return
+            navigationController?.pushViewController(SignUpViewController(), animated: true)
         }
-        // 로그인 성공 화면으로 이동
     }
     
     private func isLoggedIn() -> Bool {

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0F9738562D8668B8003DBCD2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F9738552D8668B8003DBCD2 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0F5401322D8330FC009EAB2C /* iOS-BaroIntern-LeeMyungji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-BaroIntern-LeeMyungji.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F9738562D8668B8003DBCD2 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "iOS-BaroIntern-LeeMyungji";
 			packageProductDependencies = (
+				0F9738552D8668B8003DBCD2 /* SnapKit */,
 			);
 			productName = "iOS-BaroIntern-LeeMyungji";
 			productReference = 0F5401322D8330FC009EAB2C /* iOS-BaroIntern-LeeMyungji.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 0F5401292D8330FC009EAB2C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0F9738542D8668B8003DBCD2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F5401332D8330FC009EAB2C /* Products */;
 			projectDirPath = "";
@@ -345,6 +354,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F9738542D8668B8003DBCD2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F9738552D8668B8003DBCD2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F9738542D8668B8003DBCD2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0F54012A2D8330FC009EAB2C /* Project object */;
 }
