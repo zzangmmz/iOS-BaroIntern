@@ -8,11 +8,12 @@
 import UIKit
 
 final class PasswordToggleButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(title: String) {
+        super.init(frame: .zero)
         
         self.backgroundColor = .clear
-        self.titleLabel?.font = .systemFont(ofSize: 16)
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.font = .systemFont(ofSize: 15)
         self.setTitleColor(.white, for: .normal)
     }
     
