@@ -60,15 +60,16 @@ final class StartViewController: UIViewController {
     }
     
     @objc private func startButtonTapped() {
-        if isLoggedIn() {
-            // 로그인 성공 화면으로 이동
-        } else {
+        guard let id = isLoggedIn() else {
             // 회원가입 화면으로 이동
             navigationController?.pushViewController(SignUpViewController(), animated: true)
+            return
         }
+        // 로그인 화면으로 이동
+        navigationController?.pushViewController(LoggedInViewController(id: id), animated: true)
     }
     
-    private func isLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn)
+    private func isLoggedIn() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultsKeys.loggedInID)
     }
 }

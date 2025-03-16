@@ -7,5 +7,5 @@
 
 
 struct UserDefaultsKeys {
-    static let isLoggedIn = "isLoggedIn"
+    static let loggedInID = "loggedInID"
 }

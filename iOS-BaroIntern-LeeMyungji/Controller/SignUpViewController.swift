@@ -95,6 +95,7 @@ final class SignUpViewController: UIViewController {
         setupConstraints()
         setupActions()
         setupTapGestures()
+        setupBackButtonAction()
     }
     
     private func setupUI() {
@@ -225,6 +226,20 @@ final class SignUpViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
     
+    private func setupBackButtonAction() {
+        
+        let backButtonAction = UIAction { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            primaryAction: backButtonAction
+        )
+        
+        navigationItem.leftBarButtonItem?.tintColor = .standard
+    }
+    
     @objc private func passwordSecureModeToggle() {
         passwordTextField.isSecureTextEntry.toggle()
         
@@ -247,8 +262,8 @@ final class SignUpViewController: UIViewController {
     
     @objc private func signUpButtonTapped() {
         guard let id = idTextField.text, !id.isEmpty,
-        let password = passwordTextField.text, !password.isEmpty,
-        let nickname = nicknameTextField.text, !nickname.isEmpty else {
+              let password = passwordTextField.text, !password.isEmpty,
+              let nickname = nicknameTextField.text, !nickname.isEmpty else {
             return
         }
         
@@ -262,8 +277,9 @@ final class SignUpViewController: UIViewController {
         
         if CoreDataManager.shared.saveUser(newUser) {
             // 로그인 성공 화면으로 이동
-            // 유저디플트 로그인 여부 true로 변경
-            UserDefaults.standard.setValue(true, forKey: UserDefaultsKeys.isLoggedIn)
+            navigationController?.pushViewController(LoggedInViewController(id: newUser.id), animated: true)
+            // 유저디플트에 로그인 아이디 저장
+            UserDefaults.standard.setValue(id, forKey: UserDefaultsKeys.loggedInID)
         } else {
             showAlert(title: "회원가입 실패", message: "사용자 등록에 실패했습니다.")
         }
