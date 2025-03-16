@@ -21,8 +21,8 @@ final class SignUpViewController: UIViewController {
     
     // Password
     private let passwordLabel = InputTitleLabel(text: "비밀번호")
-    private let passwordTextField = InputTextField()
-    private let togglePasswordButton = PasswordToggleButton()
+    private let passwordTextField = InputTextField(isSecured: true)
+    private let togglePasswordButton = PasswordToggleButton(title: "표시")
     private let passwordValidationLabel = InputValidationLabel()
     private lazy var passwordContainerView = InputContainerView(subviews: [
         passwordLabel,
@@ -32,8 +32,8 @@ final class SignUpViewController: UIViewController {
     
     // Password-check
     private let passwordCheckLabel = InputTitleLabel(text: "비밀번호 확인")
-    private let passwordCheckTextField = InputTextField()
-    private let togglePasswordCheckButton = PasswordToggleButton()
+    private let passwordCheckTextField = InputTextField(isSecured: true)
+    private let togglePasswordCheckButton = PasswordToggleButton(title: "표시")
     private let passwordCheckValidationLabel = InputValidationLabel()
     private lazy var passwordCheckContainerView = InputContainerView(subviews: [
         passwordCheckLabel,
@@ -141,7 +141,7 @@ final class SignUpViewController: UIViewController {
         
         togglePasswordButton.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().offset(-8)
+            $0.trailing.equalToSuperview().offset(-12)
         }
         
         passwordValidationLabel.snp.makeConstraints {
@@ -167,7 +167,7 @@ final class SignUpViewController: UIViewController {
         
         togglePasswordCheckButton.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().offset(-8)
+            $0.trailing.equalToSuperview().offset(-12)
         }
         
         passwordCheckValidationLabel.snp.makeConstraints {
