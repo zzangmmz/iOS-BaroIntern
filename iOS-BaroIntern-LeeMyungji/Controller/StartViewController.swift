@@ -11,9 +11,11 @@ final class StartViewController: UIViewController {
     private let startButton: UIButton = {
         let button = UIButton()
         button.setTitle("시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitleColor(.standard, for: .normal)
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.standard.cgColor
         return button
     }()
     
