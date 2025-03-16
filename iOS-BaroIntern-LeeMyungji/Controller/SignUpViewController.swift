@@ -215,6 +215,8 @@ final class SignUpViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
     
     @objc private func passwordSecureModeToggle() {
@@ -234,6 +236,28 @@ final class SignUpViewController: UIViewController {
             passwordCheckSecureButton.setTitle("표시", for: .normal)
         } else {
             passwordCheckSecureButton.setTitle("숨김", for: .normal)
+        }
+    }
+    
+    @objc private func signUpButtonTapped() {
+        guard let id = idTextField.text, !id.isEmpty,
+        let password = passwordTextField.text, !password.isEmpty,
+        let nickname = nicknameTextField.text, !nickname.isEmpty else {
+            return
+        }
+        
+        // 이미 존재하는 아이디
+        if CoreDataManager.shared.isExistID(id) {
+            showAlert(title: "회원가입 실패", message: "이미 존재하는 아이디입니다.")
+            return
+        }
+        
+        let newUser = UserData(id: id, password: password, nickname: nickname)
+        
+        if CoreDataManager.shared.saveUser(newUser) {
+            // 로그인 성공 화면으로 이동
+        } else {
+            showAlert(title: "회원가입 실패", message: "사용자 등록에 실패했습니다.")
         }
     }
 }
@@ -340,7 +364,7 @@ extension SignUpViewController {
 // MARK: - 사용자 입력 데이터 유효성 검사
 extension SignUpViewController {
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        // 첫 글자가 공백이면 삭제
+        // 첫 글자가 공백일 경우 공백 삭제
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
@@ -506,5 +530,13 @@ extension SignUpViewController {
             signUpButton.isEnabled = false
             signUpButton.backgroundColor = .clear
         }
+    }
+}
+
+extension SignUpViewController {
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }
