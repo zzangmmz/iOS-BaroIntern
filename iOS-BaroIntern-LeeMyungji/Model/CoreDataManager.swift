@@ -29,4 +29,18 @@ class CoreDataManager {
             return false
         }
     }
+    
+    func saveUser(_ user: UserData) -> Bool {
+        let newUser = User(context: context)
+        newUser.id = user.id
+        newUser.password = user.password
+        newUser.nickname = user.nickname
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
 }
