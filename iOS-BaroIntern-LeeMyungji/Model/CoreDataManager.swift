@@ -80,11 +80,11 @@ class CoreDataManager {
     }
     
     // 회원탈퇴 메서드
-    func deleteUser() -> Bool {
+    func deleteUser() {
         guard let currentUser = currentUser,
               let id = currentUser.id else {
             print("회원탈퇴 오류: 로그인된 사용자가 없음.")
-            return false
+            return
         }
         
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -97,12 +97,9 @@ class CoreDataManager {
                 try context.save()
                 self.logout()
                 print("회원탈퇴 성공")
-                return true
             }
-            return false
         } catch {
             print("회원탈퇴 오류: \(error)")
-            return false
         }
     }
 }
