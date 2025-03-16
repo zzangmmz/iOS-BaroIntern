@@ -256,6 +256,8 @@ final class SignUpViewController: UIViewController {
         
         if CoreDataManager.shared.saveUser(newUser) {
             // 로그인 성공 화면으로 이동
+            // 유저디플트 로그인 여부 true로 변경
+            UserDefaults.standard.setValue(true, forKey: UserDefaultsKeys.isLoggedIn)
         } else {
             showAlert(title: "회원가입 실패", message: "사용자 등록에 실패했습니다.")
         }
