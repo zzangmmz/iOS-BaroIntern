@@ -12,7 +12,7 @@ final class SignUpViewController: UIViewController {
     // MARK: - UI Components
     // ID
     private let idLabel = InputTitleLabel(text: "이메일")
-    private let idTextField = InputTextField()
+    private let idTextField = InputTextField(keyboardType: .emailAddress)
     private let idValidationLabel = InputValidationLabel()
     private lazy var idContainerView = InputContainerView(subviews: [
         idLabel,
