@@ -211,9 +211,9 @@ final class SignUpViewController: UIViewController {
         passwordSecureButton.addTarget(self, action: #selector(passwordSecureModeToggle), for: .touchUpInside)
         passwordCheckSecureButton.addTarget(self, action: #selector(passwordCheckSecureModeToggle), for: .touchUpInside)
         
-        idTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
-        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
-        passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
+        idTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordCheckTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
@@ -352,6 +352,7 @@ extension SignUpViewController {
             validateID()
         } else if textField == passwordTextField {
             validatePassword()
+            validatePasswordCheck()
         } else if textField == passwordCheckTextField {
             validatePasswordCheck()
         } else if textField == nicknameTextField {
@@ -466,9 +467,6 @@ extension SignUpViewController {
     private func validatePasswordCheck() {
         guard let password = passwordTextField.text, !password.isEmpty,
               let check = passwordCheckTextField.text, !check.isEmpty else {
-            passwordCheckValidationLabel.text = "비밀번호 확인을 입력해주세요."
-            passwordCheckValidationLabel.textColor = .systemRed
-            passwordCheckContainerView.layer.borderColor = UIColor.systemRed.cgColor
             isPasswordMatched = false
             return
         }
