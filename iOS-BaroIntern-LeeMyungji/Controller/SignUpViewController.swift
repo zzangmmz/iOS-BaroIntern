@@ -262,6 +262,7 @@ final class SignUpViewController: UIViewController {
         
         if CoreDataManager.shared.saveUser(newUser) {
             // 로그인 성공 화면으로 이동
+            navigationController?.pushViewController(LoggedInViewController(id: newUser.id), animated: true)
             // 유저디플트에 로그인 아이디 저장
             UserDefaults.standard.setValue(id, forKey: UserDefaultsKeys.loggedInID)
         } else {
