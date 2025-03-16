@@ -108,7 +108,7 @@ final class SignUpViewController: UIViewController {
         }
         
         idLabel.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(12)
         }
         
@@ -129,7 +129,7 @@ final class SignUpViewController: UIViewController {
         }
         
         passwordLabel.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(12)
         }
         
@@ -155,7 +155,7 @@ final class SignUpViewController: UIViewController {
         }
         
         passwordCheckLabel.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(12)
         }
         
@@ -181,7 +181,7 @@ final class SignUpViewController: UIViewController {
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(12)
         }
         
@@ -205,5 +205,91 @@ final class SignUpViewController: UIViewController {
 }
 
 extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == idTextField {
+            idContainerView.backgroundColor = .lightGray
+            idLabel.font = .systemFont(ofSize: 11)
+            idLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview().offset(-13)
+            }
+        }
+        
+        if textField == passwordTextField {
+            passwordContainerView.backgroundColor = .lightGray
+            passwordLabel.font = .systemFont(ofSize: 11)
+            passwordLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview().offset(-13)
+            }
+        }
+        
+        if textField == passwordCheckTextField {
+            passwordCheckContainerView.backgroundColor = .lightGray
+            passwordCheckLabel.font = .systemFont(ofSize: 11)
+            passwordCheckLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview().offset(-13)
+            }
+        }
+        
+        if textField == nicknameTextField {
+            nicknameContainerView.backgroundColor = .lightGray
+            nicknameLabel.font = .systemFont(ofSize: 11)
+            nicknameLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview().offset(-13)
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.totalStackView.layoutIfNeeded()
+        }
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == idTextField {
+            idContainerView.backgroundColor = .gray
+            if idTextField.text == "" {
+                idLabel.font = .systemFont(ofSize: 18)
+                idLabel.snp.remakeConstraints {
+                    $0.centerY.equalToSuperview()
+                    $0.horizontalEdges.equalToSuperview().inset(12)
+                }
+            }
+        }
+        
+        if textField == passwordTextField {
+            passwordContainerView.backgroundColor = .gray
+            if passwordTextField.text == "" {
+                passwordLabel.font = .systemFont(ofSize: 18)
+                passwordLabel.snp.remakeConstraints {
+                    $0.centerY.equalToSuperview()
+                    $0.horizontalEdges.equalToSuperview().inset(12)
+                }
+            }
+        }
+        
+        if textField == passwordCheckTextField {
+            passwordCheckContainerView.backgroundColor = .gray
+            if passwordCheckTextField.text == "" {
+                passwordCheckLabel.font = .systemFont(ofSize: 18)
+                passwordCheckLabel.snp.remakeConstraints {
+                    $0.centerY.equalToSuperview()
+                    $0.horizontalEdges.equalToSuperview().inset(12)
+                }
+            }
+        }
+        
+        if textField == nicknameTextField {
+            nicknameContainerView.backgroundColor = .gray
+            if nicknameTextField.text == "" {
+                nicknameLabel.font = .systemFont(ofSize: 18)
+                nicknameLabel.snp.remakeConstraints {
+                    $0.centerY.equalToSuperview()
+                    $0.horizontalEdges.equalToSuperview().inset(12)
+                }
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.totalStackView.layoutIfNeeded()
+        }
+    }
 }
