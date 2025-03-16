@@ -77,8 +77,20 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDelegates()
         setupSubviews()
         setupConstraints()
+    }
+    
+    private func setupDelegates() {
+        [
+            idTextField,
+            passwordTextField,
+            passwordCheckTextField,
+            nicknameTextField
+        ].forEach {
+            $0.delegate = self
+        }
     }
     
     private func setupSubviews() {
@@ -91,4 +103,8 @@ final class SignUpViewController: UIViewController {
             $0.centerY.equalToSuperview()
         }
     }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    
 }
