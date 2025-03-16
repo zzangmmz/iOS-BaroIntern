@@ -534,9 +534,12 @@ extension SignUpViewController {
             signUpButton.isEnabled = true
             signUpButton.backgroundColor = .systemGreen
             signUpButton.layer.borderColor = UIColor.systemGreen.cgColor
+            signUpButton.setTitleColor(.white, for: .normal)
         } else {
             signUpButton.isEnabled = false
             signUpButton.backgroundColor = .clear
+            signUpButton.layer.borderColor = UIColor.standard.cgColor
+            signUpButton.setTitleColor(.standard, for: .normal)
         }
     }
 }
