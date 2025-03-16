@@ -11,29 +11,43 @@ import SnapKit
 final class SignUpViewController: UIViewController {
     // MARK: - UI Components
     // ID
-    private let idContainerView = InputContainerView()
     private let idLabel = InputTitleLabel(text: "이메일")
     private let idTextField = InputTextField()
     private let idValidationLabel = InputValidationLabel()
+    private lazy var idContainerView = InputContainerView(subviews: [
+        idLabel,
+        idTextField
+    ])
     
     // Password
-    private let passwordContainerView = InputContainerView()
     private let passwordLabel = InputTitleLabel(text: "비밀번호")
     private let passwordTextField = InputTextField()
     private let togglePasswordButton = PasswordToggleButton()
     private let passwordValidationLabel = InputValidationLabel()
+    private lazy var passwordContainerView = InputContainerView(subviews: [
+        passwordLabel,
+        passwordTextField,
+        togglePasswordButton
+    ])
     
     // Password-check
-    private let passwordCheckContainerView = InputContainerView()
     private let passwordCheckLabel = InputTitleLabel(text: "비밀번호 확인")
     private let passwordCheckTextField = InputTextField()
     private let togglePasswordCheckButton = PasswordToggleButton()
     private let passwordCheckValidationLabel = InputValidationLabel()
+    private lazy var passwordCheckContainerView = InputContainerView(subviews: [
+        passwordLabel,
+        passwordCheckTextField,
+        togglePasswordCheckButton
+    ])
     
     // Nickname
-    private let nicknameContainerView = InputContainerView()
     private let nicknameLabel = InputTitleLabel(text: "닉네임")
     private let nicknameTextField = InputTextField()
+    private lazy var nicknameContainerView = InputContainerView(subviews: [
+        nicknameLabel,
+        nicknameTextField
+    ])
     
     // Sign-up button
     private let signUpButton: UIButton = {
@@ -68,40 +82,6 @@ final class SignUpViewController: UIViewController {
     }
     
     private func setupSubviews() {
-        // ID ContainerView
-        [
-            idLabel,
-            idTextField
-        ].forEach {
-            idContainerView.addSubview($0)
-        }
-        
-        // Password ContainerView
-        [
-            passwordLabel,
-            passwordTextField,
-            togglePasswordButton
-        ].forEach {
-            passwordContainerView.addSubview($0)
-        }
-        
-        // Password-check ContainerView
-        [
-            passwordCheckLabel,
-            passwordCheckTextField,
-            togglePasswordCheckButton
-        ].forEach {
-            passwordCheckContainerView.addSubview($0)
-        }
-        
-        // Nickname ContainerView
-        [
-            nicknameLabel,
-            nicknameTextField
-        ].forEach {
-            nicknameContainerView.addSubview($0)
-        }
-        
         view.addSubview(totalStackView)
     }
     
