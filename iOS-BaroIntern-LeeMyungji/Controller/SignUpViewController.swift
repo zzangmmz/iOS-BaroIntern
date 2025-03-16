@@ -85,6 +85,7 @@ final class SignUpViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         setupActions()
+        setupTapGestures()
     }
     
     private func setupDelegates() {
@@ -317,5 +318,22 @@ extension SignUpViewController: UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
             self.totalStackView.layoutIfNeeded()
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension SignUpViewController {
+    private func setupTapGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
