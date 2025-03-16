@@ -99,6 +99,7 @@ final class SignUpViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .background
+        navigationController?.navigationBar.tintColor = .standard
     }
     
     private func setupDelegates() {
