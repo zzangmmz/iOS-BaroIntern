@@ -95,6 +95,7 @@ final class SignUpViewController: UIViewController {
         setupConstraints()
         setupActions()
         setupTapGestures()
+        setupBackButtonAction()
     }
     
     private func setupUI() {
@@ -225,6 +226,20 @@ final class SignUpViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
     
+    private func setupBackButtonAction() {
+        
+        let backButtonAction = UIAction { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            primaryAction: backButtonAction
+        )
+        
+        navigationItem.leftBarButtonItem?.tintColor = .standard
+    }
+    
     @objc private func passwordSecureModeToggle() {
         passwordTextField.isSecureTextEntry.toggle()
         
@@ -247,8 +262,8 @@ final class SignUpViewController: UIViewController {
     
     @objc private func signUpButtonTapped() {
         guard let id = idTextField.text, !id.isEmpty,
-        let password = passwordTextField.text, !password.isEmpty,
-        let nickname = nicknameTextField.text, !nickname.isEmpty else {
+              let password = passwordTextField.text, !password.isEmpty,
+              let nickname = nicknameTextField.text, !nickname.isEmpty else {
             return
         }
         
