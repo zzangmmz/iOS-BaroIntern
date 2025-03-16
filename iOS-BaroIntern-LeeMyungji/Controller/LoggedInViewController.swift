@@ -86,6 +86,7 @@ final class LoggedInViewController: UIViewController {
         setupUI()
         setupSubviews()
         setupConstraints()
+        setupActions()
     }
     
     private func setupUI() {
@@ -119,5 +120,35 @@ final class LoggedInViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.width.equalTo(120)
         }
+    }
+    
+    private func setupActions() {
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccountButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func logoutButtonTapped() {
+        showAlert(title: "로그아웃 하시겠습니까?") { [weak self] in
+            CoreDataManager.shared.logout()
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
+    @objc private func deleteAccountButtonTapped() {
+        showAlert(title: "탈퇴하시겠습니까?") { [weak self] in
+            CoreDataManager.shared.deleteUser()
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+}
+
+extension LoggedInViewController {
+    private func showAlert(title: String, completion: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive) { _ in
+            completion()
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        present(alert, animated: true)
     }
 }
