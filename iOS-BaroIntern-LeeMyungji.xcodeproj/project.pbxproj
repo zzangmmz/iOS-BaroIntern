@@ -8,14 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0F9738562D8668B8003DBCD2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F9738552D8668B8003DBCD2 /* SnapKit */; };
-		0F9738592D86C065003DBCD2 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9738582D86C065003DBCD2 /* User+CoreDataProperties.swift */; };
-		0F97385A2D86C065003DBCD2 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9738572D86C065003DBCD2 /* User+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F5401322D8330FC009EAB2C /* iOS-BaroIntern-LeeMyungji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-BaroIntern-LeeMyungji.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0F9738572D86C065003DBCD2 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0F9738582D86C065003DBCD2 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,8 +50,6 @@
 		0F5401292D8330FC009EAB2C = {
 			isa = PBXGroup;
 			children = (
-				0F9738572D86C065003DBCD2 /* User+CoreDataClass.swift */,
-				0F9738582D86C065003DBCD2 /* User+CoreDataProperties.swift */,
 				0F5401342D8330FC009EAB2C /* iOS-BaroIntern-LeeMyungji */,
 				0F5401332D8330FC009EAB2C /* Products */,
 			);
@@ -147,8 +141,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F9738592D86C065003DBCD2 /* User+CoreDataProperties.swift in Sources */,
-				0F97385A2D86C065003DBCD2 /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
