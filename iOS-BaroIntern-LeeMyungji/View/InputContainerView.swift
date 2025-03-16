@@ -8,8 +8,12 @@
 import UIKit
 
 final class InputContainerView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(subviews: [UIView]) {
+        super.init(frame: .zero)
+        
+        subviews.forEach { [weak self] in
+            self?.addSubview($0)
+        }
         
         setupUI()
     }
