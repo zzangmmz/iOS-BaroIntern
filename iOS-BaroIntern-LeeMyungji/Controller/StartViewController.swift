@@ -66,6 +66,7 @@ final class StartViewController: UIViewController {
             return
         }
         // 로그인 화면으로 이동
+        navigationController?.pushViewController(LoggedInViewController(id: id), animated: true)
     }
     
     private func isLoggedIn() -> String? {
