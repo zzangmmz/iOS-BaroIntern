@@ -18,6 +18,7 @@ final class InputTextField: UITextField {
         self.isSecureTextEntry = isSecured
         self.autocapitalizationType = .none
         self.autocorrectionType = .no
+        self.passwordRules = nil
         self.spellCheckingType = .no
         self.keyboardType = keyboardType
     }
