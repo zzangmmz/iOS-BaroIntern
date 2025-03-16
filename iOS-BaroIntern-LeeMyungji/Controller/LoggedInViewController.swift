@@ -87,6 +87,7 @@ final class LoggedInViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         setupActions()
+        setupBackButtonAction()
     }
     
     private func setupUI() {
@@ -125,6 +126,19 @@ final class LoggedInViewController: UIViewController {
     private func setupActions() {
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         deleteAccountButton.addTarget(self, action: #selector(deleteAccountButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupBackButtonAction() {
+        let backButtonAction = UIAction { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            primaryAction: backButtonAction
+        )
+        
+        navigationItem.leftBarButtonItem?.tintColor = .standard
     }
     
     @objc private func logoutButtonTapped() {
