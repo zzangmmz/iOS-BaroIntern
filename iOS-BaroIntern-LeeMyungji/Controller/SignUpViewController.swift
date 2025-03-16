@@ -22,23 +22,23 @@ final class SignUpViewController: UIViewController {
     // Password
     private let passwordLabel = InputTitleLabel(text: "비밀번호")
     private let passwordTextField = InputTextField(isSecured: true)
-    private let togglePasswordButton = PasswordToggleButton(title: "표시")
+    private let passwordSecureButton = PasswordToggleButton(title: "표시")
     private let passwordValidationLabel = InputValidationLabel()
     private lazy var passwordContainerView = InputContainerView(subviews: [
         passwordLabel,
         passwordTextField,
-        togglePasswordButton
+        passwordSecureButton
     ])
     
     // Password-check
     private let passwordCheckLabel = InputTitleLabel(text: "비밀번호 확인")
     private let passwordCheckTextField = InputTextField(isSecured: true)
-    private let togglePasswordCheckButton = PasswordToggleButton(title: "표시")
+    private let passwordCheckSecureButton = PasswordToggleButton(title: "표시")
     private let passwordCheckValidationLabel = InputValidationLabel()
     private lazy var passwordCheckContainerView = InputContainerView(subviews: [
         passwordCheckLabel,
         passwordCheckTextField,
-        togglePasswordCheckButton
+        passwordCheckSecureButton
     ])
     
     // Nickname
@@ -84,6 +84,7 @@ final class SignUpViewController: UIViewController {
         setupDelegates()
         setupSubviews()
         setupConstraints()
+        setupActions()
     }
     
     private func setupDelegates() {
@@ -134,12 +135,12 @@ final class SignUpViewController: UIViewController {
         }
         
         passwordTextField.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(8)
+            $0.horizontalEdges.equalToSuperview().inset(12)
             $0.top.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview().offset(-2)
         }
         
-        togglePasswordButton.snp.makeConstraints {
+        passwordSecureButton.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().offset(-12)
         }
@@ -160,12 +161,12 @@ final class SignUpViewController: UIViewController {
         }
         
         passwordCheckTextField.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(8)
+            $0.horizontalEdges.equalToSuperview().inset(12)
             $0.top.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview().offset(-2)
         }
         
-        togglePasswordCheckButton.snp.makeConstraints {
+        passwordCheckSecureButton.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().offset(-12)
         }
@@ -200,6 +201,31 @@ final class SignUpViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(30)
+        }
+    }
+    
+    private func setupActions() {
+        passwordSecureButton.addTarget(self, action: #selector(passwordSecureModeToggle), for: .touchUpInside)
+        passwordCheckSecureButton.addTarget(self, action: #selector(passwordCheckSecureModeToggle), for: .touchUpInside)
+    }
+    
+    @objc private func passwordSecureModeToggle() {
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        if passwordTextField.isSecureTextEntry {
+            passwordSecureButton.setTitle("표시", for: .normal)
+        } else {
+            passwordSecureButton.setTitle("숨김", for: .normal)
+        }
+    }
+    
+    @objc private func passwordCheckSecureModeToggle() {
+        passwordCheckTextField.isSecureTextEntry.toggle()
+        
+        if passwordCheckTextField.isSecureTextEntry {
+            passwordCheckSecureButton.setTitle("표시", for: .normal)
+        } else {
+            passwordCheckSecureButton.setTitle("숨김", for: .normal)
         }
     }
 }
