@@ -11,7 +11,7 @@ final class InputTextField: UITextField {
     init(ofSize: CGFloat = 16, isSecured: Bool = false, keyboardType: UIKeyboardType = .default) {
         super.init(frame: .zero)
         
-        self.textColor = .white
+        self.textColor = .standard
         self.borderStyle = .none
         self.backgroundColor = .clear
         self.font = .systemFont(ofSize: ofSize)

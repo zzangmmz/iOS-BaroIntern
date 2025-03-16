@@ -14,7 +14,7 @@ final class PasswordToggleButton: UIButton {
         self.backgroundColor = .clear
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 15)
-        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(.standard, for: .normal)
     }
     
     required init?(coder: NSCoder) {

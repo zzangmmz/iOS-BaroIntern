@@ -55,10 +55,10 @@ final class SignUpViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.borderColor = UIColor.standard.cgColor
         button.backgroundColor = .clear
         button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.standard, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
         button.isEnabled = false
         return button
@@ -89,11 +89,16 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         setupDelegates()
         setupSubviews()
         setupConstraints()
         setupActions()
         setupTapGestures()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .background
     }
     
     private func setupDelegates() {

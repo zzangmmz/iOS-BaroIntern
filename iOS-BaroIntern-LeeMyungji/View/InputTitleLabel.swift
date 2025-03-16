@@ -12,7 +12,7 @@ final class InputTitleLabel: UILabel {
         super.init(frame: .zero)
         
         self.text = text
-        self.textColor = .white
+        self.textColor = .standard
         self.font = .systemFont(ofSize: ofSize)
     }
     

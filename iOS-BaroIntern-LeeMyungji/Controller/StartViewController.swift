@@ -19,9 +19,15 @@ final class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
         setupSubviews()
         setupConstraints()
         setupActions()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .background
     }
     
     private func setupSubviews() {

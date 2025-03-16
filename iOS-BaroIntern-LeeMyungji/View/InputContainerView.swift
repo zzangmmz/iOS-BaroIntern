@@ -24,7 +24,7 @@ final class InputContainerView: UIView {
     
     private func setupUI() {
         self.backgroundColor = .clear
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.standard.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 8
     }
