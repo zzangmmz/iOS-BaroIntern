@@ -8,9 +8,10 @@
 import UIKit
 
 final class InputTextField: UITextField {
-    init(ofSize: CGFloat = 18, isSecured: Bool = false, keyboardType: UIKeyboardType = .default) {
+    init(ofSize: CGFloat = 16, isSecured: Bool = false, keyboardType: UIKeyboardType = .default) {
         super.init(frame: .zero)
         
+        self.textColor = .white
         self.borderStyle = .none
         self.backgroundColor = .clear
         self.font = .systemFont(ofSize: ofSize)
