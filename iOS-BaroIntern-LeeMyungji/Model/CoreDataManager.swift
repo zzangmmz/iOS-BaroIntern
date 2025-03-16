@@ -74,10 +74,9 @@ class CoreDataManager {
     }
     
     // 로그아웃 메서드
-    func logout() -> Bool {
+    func logout() {
         currentUser = nil
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.loggedInID)
-        return true
     }
     
     // 회원탈퇴 메서드
