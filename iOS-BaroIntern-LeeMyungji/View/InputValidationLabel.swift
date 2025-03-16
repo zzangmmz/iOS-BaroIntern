@@ -11,7 +11,6 @@ final class InputValidationLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.textColor = .red
         self.font = .systemFont(ofSize: 11)
     }
     
